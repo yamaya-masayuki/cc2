@@ -15,6 +15,10 @@ jobs:
       JVM_OPTS: -Xmx3200m
       TERM: dumb
       GRADLE_OPTS: -Dorg.gradle.daemon=false
+      MYSQL_DATABASE: sbjauth
+      MYSQL_USER: root 
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
     steps:
       - checkout
       - restore_cache:
