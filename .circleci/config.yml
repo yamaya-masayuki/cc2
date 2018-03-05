@@ -14,13 +14,14 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "build.gradle" }}
           - v1-dependencies-
-      - run: apt-get -yqq update
       - run:
           name: Install Gradle
           command: |
-            sudo add-apt-repository -y ppa:cwchien/gradle
+            add-apt-repository -y ppa:cwchien/gradle
+            apt-get -yqq update
             apt-get -yqq install gradle
             ln -s /usr/lib/jvm/java-8-oracle /usr/lib/jvm/default-java
+            gradle --version
       - run: gradle dependencies
       - save_cache:
           paths:
