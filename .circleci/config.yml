@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Wait for db
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
-      - run: mysql -u root -e 'show tables;'
+      - run: mysql sbjauth -u root -e 'show tables;'
       - checkout
       - restore_cache:
           keys:
