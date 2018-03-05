@@ -16,6 +16,19 @@ jobs:
       TERM: dumb
       GRADLE_OPTS: -Dorg.gradle.daemon=false
     steps:
+      - run:
+          name: install dockerize
+          command: |
+            wget -q https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+            sudo tar -C /usr/local/bin -xzf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+            rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+            dockernize -v
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run: mysql -u root -e 'show tables;'
       - checkout
       - restore_cache:
           keys:
@@ -37,5 +50,4 @@ jobs:
             - ~/.gradle
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      - run: mysql -u root -e 'show tables;'
       - run: ./gradlew test
