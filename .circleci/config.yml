@@ -22,9 +22,11 @@ jobs:
             apt-get -yqq install gradle
             ln -s /usr/lib/jvm/java-8-oracle /usr/lib/jvm/default-java
             gradle --version
-      - run: gradle dependencies
+      - run: gradle wrap
+      - run: ./gradlew dependencies
       - save_cache:
           paths:
             - ~/.gradle
+            - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
       - run: gradle test
