@@ -6,9 +6,7 @@ jobs:
         environment:
           MYSQL_HOST: 127.0.0.1
       - image: circleci/mysql:5.7
-        command: |
-          echo $MYSQL_ROOT_HOST
-          service mysql start
+        command: [--character-set-server=utf8, --collation-server=utf8_general_ci, --default-storage-engine=innodb]
         environment:
           MYSQL_DATABASE: sbjauth
           MYSQL_USER: root
