@@ -4,6 +4,12 @@ jobs:
     docker:
       - image: circleci/jdk8:0.1.1
       - image: circleci/mysql:5.7
+        command: service --status-all
+        environment:
+          MYSQL_DATABASE: sbjauth
+          MYSQL_USER: root 
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
     working_directory: /tmp/cc2
     environment:
       JVM_OPTS: -Xmx3200m
