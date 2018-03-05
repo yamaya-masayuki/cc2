@@ -18,7 +18,7 @@ jobs:
       TERM: dumb
       GRADLE_OPTS: -Dorg.gradle.daemon=false
     steps:
-      - run: echo $PATH
+      - run: echo $MYSQL_HOST
       - run:
           name: install dockerize
           command: |
