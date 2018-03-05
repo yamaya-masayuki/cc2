@@ -18,6 +18,7 @@ jobs:
       TERM: dumb
       GRADLE_OPTS: -Dorg.gradle.daemon=false
     steps:
+      - run: echo $PATH
       - run:
           name: install dockerize
           command: |
