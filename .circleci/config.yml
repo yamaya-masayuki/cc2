@@ -19,6 +19,7 @@ jobs:
       GRADLE_OPTS: -Dorg.gradle.daemon=false
     steps:
       - run: echo $MYSQL_HOST
+      - run: apt-get -yqq install mysql-client
       - run:
           name: install dockerize
           command: |
@@ -47,7 +48,6 @@ jobs:
             gradle -v
       - run: gradle -q wrap
       - run: ./gradlew -q dependencies
-      - run: apt-get -yqq install mysql-client
       - save_cache:
           paths:
             - ~/.gradle
